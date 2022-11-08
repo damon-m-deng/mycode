@@ -32,4 +32,13 @@ def main():
     # returns "ValueError" if not found
     proto.remove("rdp")
     print(proto)
+
+    # :: and -1
+    print(proto[-1]) # return the last item
+
+    # list slicing [start:end:step]
+    # [::2] from the start to the end, return every 2nd element
+    # [::-1] return the whole list in the REVERSE order
+    print(proto[::2])
+    print(proto[::-1])
 main()
