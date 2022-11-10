@@ -7,22 +7,22 @@ trial= ["science", "turbo", {"eyes": "goggles", "goggles": "eyes"}, "nothing"]
 
 
 nightmare= [
-        {
-            "slappy": "a", 
-            "text": "b", 
-            "kumquat": "goggles", 
-            "user":
-            {
-                "awesome": "c", 
-                "name": 
+                {
+                    "slappy": "a", 
+                    "text": "b", 
+                    "kumquat": "goggles", 
+                    "user":
                     {
-                      "first": "eyes", 
-                      "last": "toes"
-                    }
-            },
-            "banana": 15, 
-            "d": "nothing"
-        }
+                        "awesome": "c", 
+                        "name": 
+                            {
+                              "first": "eyes", 
+                              "last": "toes"
+                            }
+                    },
+                    "banana": 15, 
+                    "d": "nothing"
+                }
         ]
 
 # My eyes! The goggles do nothing!
