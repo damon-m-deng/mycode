@@ -77,7 +77,13 @@ def main():
     # we must first convert this "list like" structure into an actual list
     # using the list()
     print(list(switch.values())[2]) # this selects the 2nd position (3rd item) from the list
-
+    
+    print("test for items()")
+    print(switch)
+    # items() return tuples
+    print(switch.items())
+    for key,value in switch.items():
+        print(key, value)
 
 # call our main function
 if __name__ == "__main__":
