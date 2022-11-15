@@ -10,6 +10,7 @@ def showInstructions():
       go [direction]
       get [item]
     ''')
+    print('Get to the Garden with a key and a potion to win! Avoid the monsters! Commands include go direction and get item.')
 
 def showStatus():
     """determine the current status of the player"""
@@ -28,8 +29,39 @@ inventory=[]
 
 # a dictionary links a room to other rooms
 rooms ={
-        'Hall':{'south':'Kitchen'},
-        'Kitchen':{'north':'Hall'}
+        'Hall':
+            {
+                'south':'Kitchen',
+                'east':'Dining Room',
+                'item':'key'
+            },
+        'Kitchen':
+            {
+                'north':'Hall',
+                'item':'monster'
+            },
+        'Dining Room':
+            {
+                'west':'Hall',
+                'south':'Garden',
+                'east':'Basement',
+                'item':'potion'
+            },
+        'Garden':
+            {
+                'north':'Dining Room'
+            },
+        'Basement':
+            {
+                'west':'Dining Room',
+                'east':'Backyard',
+                'item':'wooden stick'
+            },
+        'Backyard':
+            {
+                'west':'basement',
+                'item':'zombie'
+            }
         }
 
 # start the player in the hall
@@ -72,3 +104,24 @@ while True:
         # if there is no item in the room, or the item does not match user's input
         else:
             print("Cannot get "+move[1]+" in the "+currentRoom+"!")
+    # define winning condition (to break the while loop)
+    if currentRoom=='Garden' and 'key' in inventory and 'potion' in inventory:
+        print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
+        break
+    elif currentRoom=='Backyard':
+        # if player has a wooden stick, player will kill the zombie. Otherwise, gameover
+        print('A zombie spotted you!')
+        if 'wooden stick' in inventory:
+            print("You stabbed the zombie's head with your wooden stick. The zombie struggled but eventfully stopped moving.")
+            # remove wooden stick from your inventory
+            for item in inventory:
+                if item == 'wooden stick':
+                    del item
+            # remove zombie from the backyard
+            # TODO: will only success once
+            del rooms['Backyard']['item']
+            continue
+        else:
+            # gameover
+            print("You thought:\'I should have grabbed the stick from the basement...\'. You puched the zombie's head but nothing happened. Better luck next time.")
+            break
