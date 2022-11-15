@@ -26,8 +26,6 @@ def showStatus():
         print('You see a '+ rooms[currentRoom]['item'])
     print("---------------------------")
 
-def main():
-
 # player's inventory
 inventory=[]
 
@@ -126,3 +124,5 @@ while True:
             # gameover
             print("You thought:\'I should have grabbed the stick from the basement...\'. You puched the zombie's head but nothing happened. Better luck next time.")
             break
+if __name__=="__main__":
+    main()
