@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-## Added 2 more rooms: Basement and Backyard
-## use now can pick up a wooden stick from the Basement, and kill the zombie in Backyard.
-## added gameover condition: killed by zombie
+## count how many "moves" the player has made
 
 def showInstructions():
     """Show the game instructions when called"""
@@ -27,6 +25,8 @@ def showStatus():
     if "item" in rooms[currentRoom]:
         print('You see a '+ rooms[currentRoom]['item'])
     print("---------------------------")
+
+def main():
 
 # player's inventory
 inventory=[]
