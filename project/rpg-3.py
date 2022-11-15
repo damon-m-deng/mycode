@@ -1,13 +1,40 @@
 #!/usr/bin/env python3
 
 import requests
+from random import randint
 
 ## Add Riddles: use pokemon API to ask the user guess what pokemon am I
 
-def riddle():
-    API = "https://pokeapi.co/api/v2/pokemon/"
-    charmander=requests.get(API+"4")
+flag=1
 
+# riddle function: use a flag to have 1, 2, 3 values
+# define the flag in main with a default value of 1
+# when user successful solve the riddle, change the flag to 2
+# if user fails to solve, change the flag to 3
+def riddle():
+    API = "https://pokeapi.co/api/v2/pokemon/" 
+    pokemon=requests.get(API+str(randint(1,12))).json()
+    # print(pokemon['name'])
+    # print(pokemon['types'][0]['type'])
+
+    guess=1
+
+    print("Welcome to the Pokemon Riddle!")
+    print("Guess what Pokemon am I?")
+    while True:
+        if guess==1:
+            print(f"My type is {pokemon['types'][0]['type']['name']}.")
+        elif guess==2:
+            print(f"My ability is {pokemon['abilities'][0]['ability']['name']}.")
+        elif guess==3:
+            print(f"My pokedex ID is {pokemon['id']}")
+        else:
+            return 2
+        user_input=input("Your guess is >> ").lower()
+        if user_input == pokemon['name']:
+            print("Congratz! That is correct")
+            return 3
+        guess+=1
 
 ## count how many "moves" the player has made
 move_count=0
@@ -137,6 +164,18 @@ while True:
             # gameover
             print("You thought:\'I should have grabbed the stick from the basement...\'. You puched the zombie's head but nothing happened. Better luck next time.")
             break
+    
+    # change 3: added a pokemon riddle for Dining room
+    elif currentRoom=='Dining Room':
+        print("You hear a very rusty wheel noise coming from a little man wearing a mask, he says: ")
+        print("Let's play a game.")
+        print("=================")
+        riddle()
+        if riddle()==2:
+            print('You failed the riddle. The tile under your feet suddenly disappeared. You fell into the abyss.')
+            break
+        else:
+            continue
     # change 2: count the move steps: simulating time
     # if move_count>=10: player gets killed
     if move_count<5:
