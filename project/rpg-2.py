@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 ## count how many "moves" the player has made
+move_count=0
 
 def showInstructions():
     """Show the game instructions when called"""
@@ -90,9 +91,10 @@ while True:
         if move[1] in rooms[currentRoom]:
             # success: change the currentroom to the new room
             currentRoom = rooms[currentRoom][move[1]]
+            move_count+=1
         else:
             print('You can\'t go that way!')
-
+    
     # if user types 'get' first
     if move[0]=='get':
         # make 2 checks
@@ -110,6 +112,8 @@ while True:
     if currentRoom=='Garden' and 'key' in inventory and 'potion' in inventory:
         print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
         break
+
+    # change 1: added 2 more rooms with items, as well as a gameover condition
     elif currentRoom=='Backyard' and 'item' in rooms['Backyard']:
         # if player has a wooden stick, player will kill the zombie. Otherwise, gameover
         print('A zombie spotted you!')
@@ -124,3 +128,12 @@ while True:
             # gameover
             print("You thought:\'I should have grabbed the stick from the basement...\'. You puched the zombie's head but nothing happened. Better luck next time.")
             break
+    # change 2: count the move steps: simulating time
+    # if move_count>=10: player gets killed
+    if move_count<5:
+        print('You can still see a little bit of sunlight, but you might want to hurry up and find a way out...')
+    elif move_count>=5 and move_count<10:
+        print('It is getting darker and darker. You start to hear creepy noises. ')
+    else:
+        print('Now it is completely dark. A monster jumps out and bites you on the neck. Better luck next time.')
+        break
