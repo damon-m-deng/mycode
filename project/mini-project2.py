@@ -5,12 +5,11 @@ from random import randint
 
 ## Add Riddles: use pokemon API to ask the user guess what pokemon am I
 
-flag=1
 
-# riddle function: use a flag to have 1, 2, 3 values
-# define the flag in main with a default value of 1
-# when user successful solve the riddle, change the flag to 2
-# if user fails to solve, change the flag to 3
+# riddle function: use a function with the return value
+# when user successful solve the riddle, return 2
+# if user fails to solve, return 3
+# use more if statements in the main loop to check win/lose
 def riddle():
     API = "https://pokeapi.co/api/v2/pokemon/" 
     pokemon=requests.get(API+str(randint(1,12))).json()
