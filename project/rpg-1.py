@@ -59,7 +59,7 @@ rooms ={
             },
         'Backyard':
             {
-                'west':'basement',
+                'west':'Basement',
                 'item':'zombie'
             }
         }
@@ -108,17 +108,14 @@ while True:
     if currentRoom=='Garden' and 'key' in inventory and 'potion' in inventory:
         print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
         break
-    elif currentRoom=='Backyard':
+    elif currentRoom=='Backyard' and 'item' in rooms['Backyard']:
         # if player has a wooden stick, player will kill the zombie. Otherwise, gameover
         print('A zombie spotted you!')
         if 'wooden stick' in inventory:
             print("You stabbed the zombie's head with your wooden stick. The zombie struggled but eventfully stopped moving.")
             # remove wooden stick from your inventory
-            for item in inventory:
-                if item == 'wooden stick':
-                    del item
+            inventory.remove('wooden stick')
             # remove zombie from the backyard
-            # TODO: will only success once
             del rooms['Backyard']['item']
             continue
         else:
