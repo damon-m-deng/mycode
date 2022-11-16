@@ -17,6 +17,7 @@ app=Flask(__name__)
 # this is where we want to redirect users to
 @app.route('/success/<name>')
 def success(name):
+    # print(type(request.json))
     return f"Welcome {name}!\n"
 
 # this is a landing point for users (a start) '/' or '/start'
@@ -46,4 +47,4 @@ def login():
     return redirect(url_for("success", name=user)) # url_for('function', arg=var)
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0', port=2224)
+    app.run(host='0.0.0.0', port=2224, debug=True)
