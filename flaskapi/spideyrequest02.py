@@ -12,7 +12,7 @@ new_hero= {
            "powers": ["adamantium skeleton","claws","regeneration"]
           }
 
-# json.dumps takes a python object and returns it as a JSON string
+# json.dumps converts a python object to a JSON string
 new_hero= json.dumps(new_hero)
 
 # requests.post requires two arguments at the minimum;
