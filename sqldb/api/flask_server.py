@@ -29,6 +29,7 @@ def new_student():
 @app.route('/addrec',methods = ['POST'])
 def addrec():
     try:
+        # see student.html in templates
         nm = request.form['nm']         # student name
         addr = request.form['addr']     # student street address
         city = request.form['city']     # student city
@@ -40,7 +41,10 @@ def addrec():
             cur = con.cursor()
 
             # place the info from our form into the sqliteDB
-            cur.execute("INSERT INTO students (name,addr,city,pin) VALUES (?,?,?,?)",(nm,addr,city,pin) )
+            # SQL VALUES
+            # INSERT INTO <Table_Name> (COL1,COL2,COL3,COL4) VALUES (?,?,?,?)
+            # cur.execute("INSERT INTO students (name,addr,city,pin) VALUES (?,?,?,?)",(nm,addr,city,pin) )
+            cur.execute(f"INSERT INTO students (name,addr,city,pin) VALUES ({nm},{addr},{city},{pin})")
             # commit the transaction to our sqliteDB
             con.commit()
         # if we have made it this far, the record was successfully added to the DB
@@ -58,12 +62,15 @@ def addrec():
 @app.route('/list')
 def list_students():
     con = sql.connect("database.db")
+    # .row_factory
     con.row_factory = sql.Row
     
     cur = con.cursor()
     cur.execute("SELECT * from students")           # pull all information from the table "students"
     
     rows = cur.fetchall()
+    # rows  =   rows
+    # template  local
     return render_template("list.html",rows = rows) # return all of the sqliteDB info as HTML
 
 if __name__ == '__main__':
